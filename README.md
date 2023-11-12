@@ -1,4 +1,4 @@
-# shoushop_vue
+# compus
 
 ## Project setup
 ```
