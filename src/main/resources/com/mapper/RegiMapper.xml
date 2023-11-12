@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workmexh.mapper.home.RegiMapper">
+
+    <!--   Integer doAddact(Regiact regiact);-->
+    <insert id="doAddact" parameterType="com.workmexh.domain.Regiact">
+        insert into regi_act(regi_title,regi_author,regi_datetime,regi_starttime,regi_overtime,regi_content,regi_img,regi_number,regi_maxnum,regi_alnum)
+value (#{regiTitle},#{regiAuthor},#{regiDatetime},#{regiStarttime},#{regiOvertime},#{regiContent},#{regiImg},#{regiNumber},#{regiMaxnum},#{regiAlnum});
+    </insert>
+    <!--     Integer doNorepeat(Integer recNumber);-->
+    <select id="doNorepeat" resultType="Integer">
+          SELECT * FROM regi_act WHERE regi_number=#{regiNumber}
+    </select>
+<!-- Regiact getNumbertoselect(Integer regiNumber);-->
+    <select id="getNumbertoselect" resultType="com.workmexh.domain.Regiact">
+          SELECT * FROM regi_act WHERE regi_number=#{regiNumber}
+    </select>
+
+
+</mapper>
+ 

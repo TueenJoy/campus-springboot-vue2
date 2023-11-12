@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--    ;-->
+    <properties resource="application.properties"/>
+    <settings>
+        <!--    开启驼峰命名法-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <typeAliases>
+        <!--   2选1     <typeAlias type="com.mybatis.test.pojo.Users" alias="Users"></typeAlias>-->
+        <package name="com.workmexh.domain"/>
+    </typeAliases>
+
+
+    <!--1.配置环境 ，默认的环境id为mysql-->
+    <environments default="mysql">  <!-- default表示默认选择mysql作为项目环境 -->
+        <!--1.2.配置id为mysql的数据库环境 -->
+
+        <environment id="mysql">
+
+            <!-- 使用JDBC的事务管理 -->
+            <transactionManager type="JDBC"/>
+
+            <!--数据库连接池 -->
+            <dataSource type="POOLED">
+
+                <!--                POOLED 表示使用数据库连接池缓存数据库连接 -->
+                <!--                UNPOOLED 表示不使用数据库连接池 可以用于 spring的事务管理器时 关闭本数据池-->
+                <!--                JNDI 表示使用上下文的数据源-->
+                <property name="driver" value="${spring.datasource.driverClassName}"/>
+                <property name="url"
+                          value="${spring.datasource.url}"/>
+                <property name="username" value="${spring.datasource.username}"/>
+                <property name="password" value="${spring.datasource.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <!--2.配置Mapper的位置 -->
+    <mappers>
+
+        <package name="com.mapper"/>
+    </mappers>
+
+
+</configuration>
+

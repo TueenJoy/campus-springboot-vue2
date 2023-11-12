@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workmexh.mapper.home.RecordMapper">
+<!--    Integer dosignuptest(Record record);-->
+    <insert id="dosignuptest" parameterType="com.workmexh.domain.Record">
+        INSERT INTO record_act(rec_title,rec_number,rec_useracc)
+        VALUE (#{recTitle},#{recNumber},#{recUseracc})
+    </insert>
+<!--  List<Record> selectUserAct(String userAcc);-->
+    <select id="selectUserAct" resultType="com.workmexh.domain.Record">
+        SELECT * FROM record_act where rec_useracc=#{userAcc}
+    </select>
+<!--List<Regiact> getNumberSelect(String recNumber);-->
+    <select id="getNumberSelect" resultType="com.workmexh.domain.Regiact">
+          SELECT * FROM regi_act WHERE regi_number=#{recNumber}
+    </select>
+
+
+
+
+</mapper>
+ 

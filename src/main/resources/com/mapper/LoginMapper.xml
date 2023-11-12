@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workmexh.mapper.login.LoginMapper">
+<!--      Login userLogin(Login login);-->
+    <select id="userLogin" resultType="Login">
+          SELECT * FROM mx_user WHERE user_Acc=#{userAcc} and user_Password=#{userPassword}
+    </select>
+<!--Integer userRegister(User user);-->
+    <insert id="userRegister" parameterType="com.workmexh.domain.User">
+        INSERT INTO mx_user(user_name,user_acc,user_age,user_gender,user_password,user_mobile,user_email,user_image,user_status,user_permission)
+        VALUE (#{userName},#{userAcc},#{userAge},#{userGender},#{userPassword},#{userMobile},#{userEmail},#{userImage},#{userStatus},#{userPermission})
+    </insert>
+<!-- Integer userRegisterNorepeat(String userAcc);-->
+    <update id="userRegisterNorepeat">
+      UPDATE mx_user SET user_acc=#{userAcc} WHERE user_acc=#{userAcc}
+    </update>
+    <!--    Integer userChange(User user);  -->
+    <update id="userChange" parameterType="com.workmexh.domain.User">
+        UPDATE mx_user
+        <set>
+            <if test="userAcc!=null">
+                user_acc=#{userAcc},
+            </if>
+           <if test="userName!=null">
+               user_name=#{userName},
+           </if>
+            <if test="userAge!=null">
+                user_age=#{userAge},
+            </if>
+            <if test="userGender!=null">
+                user_gender=#{userGender},
+            </if>
+            <if test="userMobile!=null">
+                user_mobile=#{userMobile},
+            </if>
+            <if test="userEmail!=null">
+                user_email=#{userEmail},
+            </if>
+        </set>
+        WHERE user_acc=#{userAcc}
+    </update>
+
+<!--     Integer userNewpwd(Login login);-->
+    <update id="userNewpwd" parameterType="com.workmexh.domain.Login">
+        UPDATE mx_user
+        <set>
+            <if test="userAcc!=null">
+                user_acc=#{userAcc},
+            </if>
+            <if test="userPassword!=null">
+                user_password=#{userPassword},
+            </if>
+        </set>
+        WHERE user_acc=#{userAcc}
+    </update>
+<!--    Integer userMisspwd(User user);-->
+    <select id="userMisspwd" resultType="Login">
+         SELECT * FROM mx_user WHERE user_Acc=#{userAcc} and user_Mobile=#{userMobile}
+    </select>
+<!--     String usergetEmail(String userAcc,String userMobile);-->
+    <select id="usergetEmail" resultType="String">
+        SELECT user_email FROM mx_user WHERE user_acc=#{userAcc} and user_mobile=#{userMobile}
+    </select>
+<!--       Integer userNewpwdSave(String userAcc,String newWord1);-->
+    <update id="userNewpwdSave">
+      UPDATE mx_user SET user_password=#{newWord1} WHERE user_acc=#{userAcc}
+    </update>
+</mapper>
+ 

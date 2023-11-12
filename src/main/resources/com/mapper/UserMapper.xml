@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.workmexh.mapper.user.UserMapper">
+<!--    Integer insertUser(User user)-->
+<!--    新增用户 用户名默认随机生成，提供user_acc和user_password-->
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO mx_user(user_id,user_name,user_acc,user_password)
+        VALUES (null,#{userName},#{userAcc},#{userPassword})
+    </insert>
+<!--    Integer deleteUser(User user)-->
+    <delete id="deleteUser" >
+        DELETE FROM mx_user WHERE user_acc=#{userAcc}
+    </delete>
+<!--    Integer deleteUserReNum(User user)-->
+    <delete id="deleteUserReNum" >
+        DELETE FROM mx_user WHERE user_acc=#{userAcc}
+    </delete>
+<!--    Integer updateUser(User user)-->
+    <update id="updateUser">
+        UPDATE mx_user SET user_name=#{userName} WHERE user_acc=#{userAcc}
+    </update>
+<!--    User findUser(User user)-->
+    <select id="findUser" resultType="User">
+        SELECT * FROM mx_user WHERE user_Acc=#{userAcc} and user_Password=#{userPassword}
+    </select>
+<!--    List<User> findAllUsers()-->
+    <select id="findAllUsers" resultType="User">
+        SELECT * FROM mx_user
+    </select>
+</mapper>

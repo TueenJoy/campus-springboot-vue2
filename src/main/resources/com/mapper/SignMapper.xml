@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workmexh.mapper.home.SignMapper">
+<!--    List<Sign> getSignNumberUser(Integer recNumber);-->
+
+     <select id="getSignNumberUser" resultType="com.workmexh.domain.Sign">
+           SELECT sign_user,sign_uname FROM `sign_act` WHERE sign_number=#{recNumber}
+     </select>
+<!--     Integer doSignAct(Sign sign);-->
+
+    <insert id="doSignAct" parameterType="com.workmexh.domain.Sign">
+        insert into sign_act(sign_title,sign_number,sign_user,sign_uname)
+value (#{signTitle},#{signNumber},#{signUser},#{signUname});
+    </insert>
+
+
+</mapper>
+ 
